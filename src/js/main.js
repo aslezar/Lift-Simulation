@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	let numFloors = 0;
 	let FLOOR_HEIGHT = 80; // pixels
 	const MOVE_TIME_PER_FLOOR = 2; // seconds
-	const DOOR_ANIMATION_TIME = 1; // seconds
+	const DOOR_ANIMATION_TIME = 2; // seconds
 	let liftRequests = []; // Queue for lift requests
 
 	setupForm.addEventListener("submit", (e) => {
