@@ -101,7 +101,7 @@ button:hover {
 	width: 50%;
 	height: 100%;
 	background-color: var(--lift-door-color);
-	transition: transform 2s;
+	transition: transform 2.5s;
 }
 
 .left-door {

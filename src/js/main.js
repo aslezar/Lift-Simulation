@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	let numFloors = 0;
 	let FLOOR_HEIGHT = 80; // pixels
 	const MOVE_TIME_PER_FLOOR = 2; // seconds
-	const DOOR_ANIMATION_TIME = 2; // seconds
+	const DOOR_ANIMATION_TIME = 2.5; // seconds
 	let liftRequests = []; // Queue for lift requests
 
 	setupForm.addEventListener("submit", (e) => {
@@ -148,26 +148,28 @@ document.addEventListener("DOMContentLoaded", () => {
 		const moveTime = floorsToMove * MOVE_TIME_PER_FLOOR;
 
 		// Close doors
-		toggleLiftDoors(lift, "close");
+		// toggleLiftDoors(lift, "close");
+
+		lift.element.style.transition = `bottom ${moveTime}s`;
+		lift.element.style.bottom = `${targetPosition}px`;
 
 		setTimeout(() => {
-			lift.element.style.transition = `bottom ${moveTime}s`;
-			lift.element.style.bottom = `${targetPosition}px`;
+			
+			console.log(`Lift arrived at floor ${targetFloor}`);
+			toggleLiftDoors(lift, "open");
+
+			setTimeout(() => {
+				toggleLiftDoors(lift, "close");
+			}, DOOR_ANIMATION_TIME * 1000);
 
 			setTimeout(() => {
 				lift.currentFloor = targetFloor;
 				lift.isMoving = false;
-				console.log(`Lift arrived at floor ${targetFloor}`);
+				button.disabled = false; // Re-enable the button
+				checkAndMoveToNextFloor(lift);
+			}, 2 * DOOR_ANIMATION_TIME * 1000);
 
-				// Open doors
-				toggleLiftDoors(lift, "open");
-
-				setTimeout(() => {
-					button.disabled = false; // Re-enable the button
-					checkAndMoveToNextFloor(lift);
-				}, DOOR_ANIMATION_TIME * 1000);
-			}, moveTime * 1000);
-		}, DOOR_ANIMATION_TIME * 1000);
+		}, moveTime * 1000);
 	}
 
 	function toggleLiftDoors(lift, action) {
