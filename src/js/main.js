@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			lift.style.position = "absolute";
 			lift.style.bottom = "0";
 			lift.style.left = `${(i + 1) * (liftWidth + 20) + 120}px`;
-			lift.style.transition = `bottom ${MOVE_TIME_PER_FLOOR}s`;
+			lift.style.transition = `bottom ${MOVE_TIME_PER_FLOOR}s ease-in-out`;
 			lift.innerHTML = `
                 <div class="lift-door left-door"></div>
                 <div class="lift-door right-door"></div>
@@ -150,11 +150,10 @@ document.addEventListener("DOMContentLoaded", () => {
 		// Close doors
 		// toggleLiftDoors(lift, "close");
 
-		lift.element.style.transition = `bottom ${moveTime}s`;
+		lift.element.style.transition = `bottom ${moveTime}s ease-in-out`;
 		lift.element.style.bottom = `${targetPosition}px`;
 
 		setTimeout(() => {
-			
 			console.log(`Lift arrived at floor ${targetFloor}`);
 			toggleLiftDoors(lift, "open");
 
@@ -168,7 +167,6 @@ document.addEventListener("DOMContentLoaded", () => {
 				button.disabled = false; // Re-enable the button
 				checkAndMoveToNextFloor(lift);
 			}, 2 * DOOR_ANIMATION_TIME * 1000);
-
 		}, moveTime * 1000);
 	}
 
