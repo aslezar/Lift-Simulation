@@ -85,10 +85,12 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		});
 
-		window.addEventListener("resize", () => {
-			updateFloorHeight();
-			updateLiftPositions();
-		});
+		// window.addEventListener("resize", () => {
+		// 	console.log("hello");
+			
+		// 	updateFloorHeight();
+		// 	updateLiftPositions();
+		// });
 	}
 
 	function updateFloorHeight() {
